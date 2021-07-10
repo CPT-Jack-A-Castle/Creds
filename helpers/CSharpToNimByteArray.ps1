@@ -18,7 +18,7 @@ Param
             Write-Host "Converting $file"
             $outfile = $File + "NimByteArray.txt"
     
-            [byte[]] $hex = get-content -encoding byte -path $File
+            [byte[]] $hex = get-content -asbytestream -path $File
             $hexString = ($hex|ForEach-Object ToString X2) -join ',0x'
             $Results = $hexString.Insert(0,"var buf: array[" + $hex.Length + ", byte] = [byte 0x")
             $Results = $Results + "]"         
@@ -32,7 +32,7 @@ Param
         Write-Host "Converting $inputfile"
         $outfile = $inputfile + "NimByteArray.txt"
         
-        [byte[]] $hex = get-content -encoding byte -path $inputfile
+        [byte[]] $hex = get-content -asbytestream -path $inputfile
         $hexString = ($hex|ForEach-Object ToString X2) -join ',0x'
         $Results = $hexString.Insert(0,"var buf: array[" + $hex.Length + ", byte] = [byte 0x")
         $Results = $Results + "]"         
